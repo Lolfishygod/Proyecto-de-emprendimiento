@@ -13,28 +13,44 @@ smoothLinks.forEach(link => {
 
 // Datos históricos ficticios para demostración (últimos 20 años)
 const historicalData = [
-    { year: 2004, type: 'Tecnología', activity: 'Software', value: 45, region: 'Bogotá' },
-    { year: 2004, type: 'Comercio', activity: 'Retail', value: 62, region: 'Medellín' },
-    { year: 2005, type: 'Servicios', activity: 'Consultoría', value: 38, region: 'Cali' },
-    { year: 2006, type: 'Tecnología', activity: 'E-commerce', value: 51, region: 'Bogotá' },
-    { year: 2007, type: 'Social', activity: 'ONG', value: 28, region: 'Cartagena' },
-    { year: 2008, type: 'Creativo', activity: 'Diseño', value: 35, region: 'Medellín' },
-    { year: 2009, type: 'Comercio', activity: 'Tienda online', value: 58, region: 'Bogotá' },
-    { year: 2010, type: 'Servicios', activity: 'Asesoría', value: 44, region: 'Cali' },
-    { year: 2011, type: 'Tecnología', activity: 'App móvil', value: 65, region: 'Medellín' },
-    { year: 2012, type: 'Social', activity: 'Emprendimiento social', value: 42, region: 'Bogotá' },
-    { year: 2013, type: 'Creativo', activity: 'Marketing digital', value: 48, region: 'Cali' },
-    { year: 2014, type: 'Tecnología', activity: 'SaaS', value: 72, region: 'Bogotá' },
-    { year: 2015, type: 'Comercio', activity: 'Marketplace', value: 68, region: 'Medellín' },
-    { year: 2016, type: 'Servicios', activity: 'Freelance', value: 55, region: 'Bogotá' },
-    { year: 2017, type: 'Tecnología', activity: 'IA y Big Data', value: 88, region: 'Medellín' },
-    { year: 2018, type: 'Social', activity: 'Impacto ambiental', value: 62, region: 'Cali' },
-    { year: 2019, type: 'Creativo', activity: 'Agencia creativa', value: 58, region: 'Bogotá' },
-    { year: 2020, type: 'Tecnología', activity: 'Fintech', value: 95, region: 'Bogotá' },
-    { year: 2021, type: 'Servicios', activity: 'Servicios online', value: 71, region: 'Medellín' },
-    { year: 2022, type: 'Comercio', activity: 'E-commerce B2B', value: 82, region: 'Bogotá' },
-    { year: 2023, type: 'Tecnología', activity: 'Blockchain', value: 108, region: 'Medellín' },
-    { year: 2024, type: 'Creativo', activity: 'Content creator', value: 75, region: 'Cali' },
+    { year: 2004, type: 'Tecnología', activity: 'Software', value: 45, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2004, type: 'Comercio', activity: 'Retail', value: 62, city: 'Medellín', department: 'Antioquia' },
+    { year: 2005, type: 'Servicios', activity: 'Consultoría', value: 38, city: 'Cali', department: 'Valle del Cauca' },
+    { year: 2006, type: 'Tecnología', activity: 'E-commerce', value: 51, city: 'Soacha', department: 'Cundinamarca' },
+    { year: 2007, type: 'Social', activity: 'ONG', value: 28, city: 'Cartagena', department: 'Bolívar' },
+    { year: 2008, type: 'Creativo', activity: 'Diseño', value: 35, city: 'Medellín', department: 'Antioquia' },
+    { year: 2009, type: 'Comercio', activity: 'Tienda online', value: 58, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2010, type: 'Servicios', activity: 'Asesoría', value: 44, city: 'Palmira', department: 'Valle del Cauca' },
+    { year: 2011, type: 'Tecnología', activity: 'App móvil', value: 65, city: 'Medellín', department: 'Antioquia' },
+    { year: 2012, type: 'Social', activity: 'Emprendimiento social', value: 42, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2013, type: 'Creativo', activity: 'Marketing digital', value: 48, city: 'Cali', department: 'Valle del Cauca' },
+    { year: 2014, type: 'Tecnología', activity: 'SaaS', value: 72, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2015, type: 'Comercio', activity: 'Marketplace', value: 68, city: 'Medellín', department: 'Antioquia' },
+    { year: 2016, type: 'Servicios', activity: 'Freelance', value: 55, city: 'Bucaramanga', department: 'Santander' },
+    { year: 2017, type: 'Tecnología', activity: 'IA y Big Data', value: 88, city: 'Medellín', department: 'Antioquia' },
+    { year: 2018, type: 'Social', activity: 'Impacto ambiental', value: 62, city: 'Cali', department: 'Valle del Cauca' },
+    { year: 2019, type: 'Creativo', activity: 'Agencia creativa', value: 58, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2020, type: 'Tecnología', activity: 'Fintech', value: 95, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2021, type: 'Servicios', activity: 'Servicios online', value: 71, city: 'Medellín', department: 'Antioquia' },
+    { year: 2022, type: 'Comercio', activity: 'E-commerce B2B', value: 82, city: 'Barranquilla', department: 'Atlántico' },
+    { year: 2023, type: 'Tecnología', activity: 'Blockchain', value: 108, city: 'Medellín', department: 'Antioquia' },
+    { year: 2024, type: 'Creativo', activity: 'Content creator', value: 75, city: 'Cali', department: 'Valle del Cauca' },
+    { year: 2020, type: 'Tecnología', activity: 'Plataforma digital', value: 72, city: 'Pasto', department: 'Nariño' },
+    { year: 2021, type: 'Comercio', activity: 'Tienda online', value: 58, city: 'Santa Marta', department: 'Magdalena' },
+    { year: 2022, type: 'Servicios', activity: 'Consultoría', value: 64, city: 'Popayán', department: 'Cauca' },
+    { year: 2023, type: 'Social', activity: 'Programa comunitario', value: 45, city: 'Bogotá', department: 'Bogotá D.C.' },
+    { year: 2024, type: 'Creativo', activity: 'Diseño gráfico', value: 52, city: 'Zipaquirá', department: 'Cundinamarca' },
+    // Datos de Quibdó, Chocó
+    { year: 2004, type: 'Comercio', activity: 'Tienda tradicional', value: 28, city: 'Quibdó', department: 'Chocó' },
+    { year: 2008, type: 'Servicios', activity: 'Artesanía', value: 32, city: 'Quibdó', department: 'Chocó' },
+    { year: 2012, type: 'Social', activity: 'Cooperativa comunitaria', value: 38, city: 'Quibdó', department: 'Chocó' },
+    { year: 2016, type: 'Comercio', activity: 'Exportación de productos', value: 45, city: 'Quibdó', department: 'Chocó' },
+    { year: 2018, type: 'Servicios', activity: 'Turismo sostenible', value: 42, city: 'Quibdó', department: 'Chocó' },
+    { year: 2020, type: 'Creativo', activity: 'Artesanía digital', value: 35, city: 'Quibdó', department: 'Chocó' },
+    { year: 2021, type: 'Comercio', activity: 'E-commerce productos locales', value: 48, city: 'Quibdó', department: 'Chocó' },
+    { year: 2022, type: 'Social', activity: 'Programa de inclusión', value: 52, city: 'Quibdó', department: 'Chocó' },
+    { year: 2023, type: 'Servicios', activity: 'Consultoría ambiental', value: 58, city: 'Quibdó', department: 'Chocó' },
+    { year: 2024, type: 'Tecnología', activity: 'Plataforma de comercio local', value: 55, city: 'Quibdó', department: 'Chocó' },
 ];
 
 // Poblar filtros de años
@@ -59,13 +75,17 @@ function populateYearFilters() {
     yearToSelect.value = Math.max(...years);
 }
 
-// Poblar filtros de tipo y actividad
+// Poblar filtros de tipo, actividad, departamento y ciudad
 function populateFilters() {
     const types = [...new Set(historicalData.map(d => d.type))];
     const activities = [...new Set(historicalData.map(d => d.activity))];
+    const departments = [...new Set(historicalData.map(d => d.department))].sort();
+    const cities = [...new Set(historicalData.map(d => d.city))].sort();
     
     const typeFilter = document.getElementById('typeFilter');
     const activityFilter = document.getElementById('activityFilter');
+    const departmentFilter = document.getElementById('departmentFilter');
+    const cityFilter = document.getElementById('cityFilter');
     
     types.forEach(type => {
         const option = document.createElement('option');
@@ -80,6 +100,20 @@ function populateFilters() {
         option.textContent = activity;
         activityFilter.appendChild(option);
     });
+    
+    departments.forEach(department => {
+        const option = document.createElement('option');
+        option.value = department;
+        option.textContent = department;
+        departmentFilter.appendChild(option);
+    });
+    
+    cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityFilter.appendChild(option);
+    });
 }
 
 // Actualizar tabla con datos filtrados
@@ -88,11 +122,15 @@ function updateDataTable() {
     const yearTo = parseInt(document.getElementById('yearTo').value);
     const typeFilter = document.getElementById('typeFilter').value;
     const activityFilter = document.getElementById('activityFilter').value;
+    const departmentFilter = document.getElementById('departmentFilter').value;
+    const cityFilter = document.getElementById('cityFilter').value;
     
     let filteredData = historicalData.filter(d => 
         d.year >= yearFrom && d.year <= yearTo &&
         (typeFilter === 'Todos' || d.type === typeFilter) &&
-        (activityFilter === 'Todos' || d.activity === activityFilter)
+        (activityFilter === 'Todos' || d.activity === activityFilter) &&
+        (departmentFilter === 'Todos' || d.department === departmentFilter) &&
+        (cityFilter === 'Todos' || d.city === cityFilter)
     );
     
     const tbody = document.getElementById('dataBody');
@@ -100,7 +138,7 @@ function updateDataTable() {
     
     filteredData.forEach(row => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${row.year}</td><td>${row.type}</td><td>${row.activity}</td><td>${row.value}</td><td>${row.region}</td>`;
+        tr.innerHTML = `<td>${row.year}</td><td>${row.type}</td><td>${row.activity}</td><td>${row.value}</td><td>${row.department}</td><td>${row.city}</td>`;
         tbody.appendChild(tr);
     });
 }
@@ -111,20 +149,25 @@ function drawBarChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const products = ['Tecnología', 'Comercio', 'Servicios', 'Creativo'];
-    const femaleEntrepreneurs = [35, 42, 58, 51];
+    // Filtrar datos de Quibdó
+    const quibdoData = historicalData.filter(d => d.city === 'Quibdó');
+    const types = ['Comercio', 'Servicios', 'Creativo', 'Social'];
+    const values = types.map(type => {
+        const filtered = quibdoData.filter(d => d.type === type);
+        return filtered.length > 0 ? Math.round(filtered.reduce((sum, d) => sum + d.value, 0) / filtered.length) : 0;
+    });
     const colors = ['#38bdf8', '#fb7185', '#10b981', '#f97316'];
     
-    const barWidth = canvas.width / (products.length + 1);
-    const maxValue = Math.max(...femaleEntrepreneurs);
+    const barWidth = canvas.width / (types.length + 1);
+    const maxValue = Math.max(...values, 50);
     const scale = (canvas.height - 40) / maxValue;
     
     ctx.fillStyle = 'rgba(255,255,255,0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    products.forEach((product, i) => {
+    types.forEach((type, i) => {
         const x = (i + 0.5) * barWidth;
-        const barHeight = femaleEntrepreneurs[i] * scale;
+        const barHeight = values[i] * scale;
         const y = canvas.height - barHeight - 30;
         
         ctx.fillStyle = colors[i];
@@ -133,8 +176,8 @@ function drawBarChart() {
         ctx.fillStyle = '#cbd5e1';
         ctx.font = '12px Inter';
         ctx.textAlign = 'center';
-        ctx.fillText(product, x, canvas.height - 10);
-        ctx.fillText(femaleEntrepreneurs[i], x, y - 8);
+        ctx.fillText(type, x, canvas.height - 10);
+        ctx.fillText(values[i], x, y - 8);
     });
 }
 
@@ -144,8 +187,10 @@ function drawPieChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const types = ['Tecnología', 'Social', 'Creativo', 'Comercio'];
-    const values = [28, 18, 24, 30];
+    // Filtrar datos de Quibdó
+    const quibdoData = historicalData.filter(d => d.city === 'Quibdó');
+    const types = ['Comercio', 'Servicios', 'Social', 'Creativo'];
+    const values = types.map(type => quibdoData.filter(d => d.type === type).length);
     const colors = ['#38bdf8', '#fb7185', '#10b981', '#f97316'];
     
     const total = values.reduce((sum, value) => sum + value, 0);
@@ -200,8 +245,13 @@ function drawLineChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const years = [2004, 2008, 2012, 2016, 2020, 2024];
-    const innovationIndex = [32, 44, 58, 72, 85, 102];
+    // Filtrar datos de Quibdó y obtener años únicos
+    const quibdoData = historicalData.filter(d => d.city === 'Quibdó').sort((a, b) => a.year - b.year);
+    const years = [...new Set(quibdoData.map(d => d.year))].sort();
+    const innovationIndex = years.map(year => {
+        const yearData = quibdoData.filter(d => d.year === year);
+        return yearData.length > 0 ? Math.round(yearData.reduce((sum, d) => sum + d.value, 0) / yearData.length) : 0;
+    });
     
     ctx.fillStyle = 'rgba(255,255,255,0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -209,7 +259,7 @@ function drawLineChart() {
     const padding = 40;
     const graphWidth = canvas.width - padding * 2;
     const graphHeight = canvas.height - padding * 2;
-    const maxValue = Math.max(...innovationIndex);
+    const maxValue = Math.max(...innovationIndex, 60);
     
     ctx.strokeStyle = 'rgba(56, 189, 248, 0.3)';
     ctx.lineWidth = 1;
@@ -252,9 +302,20 @@ function drawAreaChart() {
     if (!canvas) return;
     
     const ctx = canvas.getContext('2d');
-    const years = [2004, 2008, 2012, 2016, 2020, 2024];
-    const entrepreneurship = [35, 48, 62, 75, 88, 105];
-    const innovation = [32, 44, 58, 72, 85, 102];
+    // Filtrar datos de Quibdó
+    const quibdoData = historicalData.filter(d => d.city === 'Quibdó').sort((a, b) => a.year - b.year);
+    const years = [...new Set(quibdoData.map(d => d.year))].sort();
+    
+    // Separar por tipo de emprendimiento
+    const entrepreneurship = years.map(year => {
+        const yearData = quibdoData.filter(d => d.year === year && (d.type === 'Comercio' || d.type === 'Servicios'));
+        return yearData.length > 0 ? Math.round(yearData.reduce((sum, d) => sum + d.value, 0) / yearData.length) : 0;
+    });
+    
+    const innovation = years.map(year => {
+        const yearData = quibdoData.filter(d => d.year === year && (d.type === 'Tecnología' || d.type === 'Creativo'));
+        return yearData.length > 0 ? Math.round(yearData.reduce((sum, d) => sum + d.value, 0) / yearData.length) : 0;
+    });
     
     ctx.fillStyle = 'rgba(255,255,255,0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -262,7 +323,7 @@ function drawAreaChart() {
     const padding = 40;
     const graphWidth = canvas.width - padding * 2;
     const graphHeight = canvas.height - padding * 2;
-    const maxValue = 120;
+    const maxValue = Math.max(...entrepreneurship, ...innovation, 60);
     
     // Área Emprendimiento
     ctx.fillStyle = 'rgba(251, 113, 133, 0.3)';
@@ -446,6 +507,8 @@ function setupQuiz() {
 function calculateQuiz() {
     const calculateButton = document.getElementById('calculateQuiz');
     const quizScore = document.getElementById('quizScore');
+    const adviceTableContainer = document.getElementById('adviceTableContainer');
+    const yourAdvice = document.getElementById('yourAdvice');
     
     if (calculateButton) {
         calculateButton.addEventListener('click', () => {
@@ -453,6 +516,7 @@ function calculateQuiz() {
             
             if (selectedOptions.length < quizQuestions.length) {
                 quizScore.textContent = 'Por favor responde todas las preguntas.';
+                adviceTableContainer.style.display = 'none';
                 return;
             }
             
@@ -466,24 +530,44 @@ function calculateQuiz() {
             
             let level = '';
             let color = '';
+            let personalizedAdvice = '';
+            let highlightRow = '';
             
             if (percentage <= 25) {
                 level = 'Nivel Básico: Tienes potencial para desarrollar tu capacidad emprendedora.';
                 color = '#fb7185';
+                personalizedAdvice = 'Tienes potencial para desarrollar tu capacidad emprendedora. Te recomendamos comenzar a leer sobre innovación, asistir a talleres de emprendimiento y buscar mentores en tu área de interés. No temas experimentar con ideas pequeñas.';
+                highlightRow = 'adviceRow1';
             } else if (percentage <= 50) {
                 level = 'Nivel Intermedio: Tienes buenas características emprendedoras.';
                 color = '#f97316';
+                personalizedAdvice = 'Tienes buenas características emprendedoras. Te sugerimos profundizar en áreas específicas del emprendimiento como finanzas, marketing y gestión de equipos. Busca participar en proyectos que desafíen tu creatividad.';
+                highlightRow = 'adviceRow2';
             } else if (percentage <= 75) {
                 level = 'Nivel Avanzado: Eres muy innovador y emprendedor.';
                 color = '#10b981';
+                personalizedAdvice = 'Eres muy innovador y emprendedor. Te animamos a liderar proyectos, compartir tu conocimiento con otros y buscar inversión o recursos para llevar tus ideas a escala. Considera crear una red de emprendedores.';
+                highlightRow = 'adviceRow3';
             } else {
                 level = 'Nivel Experto: Eres un innovador nato con alto potencial emprendedor.';
                 color = '#38bdf8';
+                personalizedAdvice = 'Eres un innovador nato con alto potencial emprendedor. Te recomendamos crear tu propio emprendimiento, mentorizar a otros emprendedores, o buscar oportunidades de inversión en startups. Tu visión puede transformar mercados.';
+                highlightRow = 'adviceRow4';
             }
+            
+            // Remover highlight anterior
+            document.querySelectorAll('.advice-row').forEach(row => row.classList.remove('highlighted'));
+            // Agregar highlight a la fila actual
+            const currentRow = document.getElementById(highlightRow);
+            if (currentRow) currentRow.classList.add('highlighted');
             
             quizScore.style.color = color;
             quizScore.style.borderColor = color;
             quizScore.innerHTML = `<div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${Math.round(percentage)}%</div><div>${level}</div>`;
+            
+            // Mostrar tabla de consejos
+            adviceTableContainer.style.display = 'block';
+            yourAdvice.innerHTML = `<div class="personalized-advice" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(251, 113, 133, 0.1)); border-radius: 1rem; border-left: 4px solid ${color};"><h4 style="margin-top: 0; color: ${color};">Tu Consejo Personalizado</h4><p style="margin: 0; color: var(--muted);">${personalizedAdvice}</p></div>`;
         });
     }
 }
@@ -492,12 +576,21 @@ function calculateQuiz() {
 document.addEventListener('DOMContentLoaded', () => {
     populateYearFilters();
     populateFilters();
+    
+    // Establecer Quibdó como ciudad por defecto
+    const cityFilter = document.getElementById('cityFilter');
+    if (cityFilter) {
+        cityFilter.value = 'Quibdó';
+    }
+    
     updateDataTable();
     
     document.getElementById('yearFrom')?.addEventListener('change', updateDataTable);
     document.getElementById('yearTo')?.addEventListener('change', updateDataTable);
     document.getElementById('typeFilter')?.addEventListener('change', updateDataTable);
     document.getElementById('activityFilter')?.addEventListener('change', updateDataTable);
+    document.getElementById('departmentFilter')?.addEventListener('change', updateDataTable);
+    document.getElementById('cityFilter')?.addEventListener('change', updateDataTable);
     
     setupEstimationForm();
     setupQuiz();

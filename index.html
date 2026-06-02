@@ -180,22 +180,24 @@
             </div>
             <div class="charts-grid">
                 <article class="chart-card">
-                    <h3>Capacidad emprendimiento femenino</h3>
+                    <h3>Emprendimiento por tipo en Quibdó</h3>
                     <canvas id="barChart" width="480" height="260"></canvas>
-                    <p class="chart-note">Datos sugeridos del informe Women Entrepreneurship and Labor Force.</p>
+                    <p class="chart-note">Análisis de emprendimientos en Quibdó, Chocó según tipo de negocio.</p>
                 </article>
                 <article class="chart-card">
-                    <h3>Participación por tipo de emprendimiento</h3>
+                    <h3>Distribución por tipo en Quibdó</h3>
                     <canvas id="pieChart" width="360" height="360"></canvas>
-                    <p class="chart-note">Distribución sectorial de emprendimientos en Colombia.</p>
+                    <p class="chart-note">Proporción de emprendimientos en Quibdó, Chocó por sector.</p>
                 </article>
                 <article class="chart-card">
-                    <h3>Tendencia de innovación global</h3>
+                    <h3>Tendencia de emprendimiento en Quibdó</h3>
                     <canvas id="lineChart" width="560" height="260"></canvas>
+                    <p class="chart-note">Evolución del índice de emprendimiento en Quibdó a lo largo del tiempo.</p>
                 </article>
                 <article class="chart-card">
-                    <h3>Emprendimiento vs innovación</h3>
+                    <h3>Emprendimiento vs Innovación en Quibdó</h3>
                     <canvas id="areaChart" width="560" height="260"></canvas>
+                    <p class="chart-note">Comparación entre actividades emprendedoras e innovadoras en Quibdó.</p>
                 </article>
             </div>
             <div class="table-panel">
@@ -225,6 +227,18 @@
                                 <option value="Todos">Todos</option>
                             </select>
                         </div>
+                        <div class="filter-group">
+                            <label for="departmentFilter">Departamento</label>
+                            <select id="departmentFilter">
+                                <option value="Todos">Todos</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="cityFilter">Ciudad</label>
+                            <select id="cityFilter">
+                                <option value="Todos">Todos</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="table-wrap">
@@ -235,7 +249,8 @@
                                 <th>Tipo de negocio</th>
                                 <th>Actividad</th>
                                 <th>Valor clave</th>
-                                <th>Región</th>
+                                <th>Departamento</th>
+                                <th>Ciudad</th>
                             </tr>
                         </thead>
                         <tbody id="dataBody"></tbody>
@@ -285,6 +300,41 @@
                     <h3>Tu nivel de innovación</h3>
                     <p id="quizScore">Selecciona una respuesta por pregunta para ver tu resultado.</p>
                 </div>
+            </div>
+            <div class="advice-table-container" id="adviceTableContainer" style="display: none;">
+                <h3>Tabla de niveles y consejos personalizados</h3>
+                <table class="advice-table">
+                    <thead>
+                        <tr>
+                            <th>Rango de Porcentaje</th>
+                            <th>Nivel</th>
+                            <th>Consejo Personalizado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="advice-row" id="adviceRow1">
+                            <td>0% - 25%</td>
+                            <td>Nivel Básico</td>
+                            <td>Tienes potencial para desarrollar tu capacidad emprendedora. Te recomendamos comenzar a leer sobre innovación, asistir a talleres de emprendimiento y buscar mentores en tu área de interés. No temas experimentar con ideas pequeñas.</td>
+                        </tr>
+                        <tr class="advice-row" id="adviceRow2">
+                            <td>26% - 50%</td>
+                            <td>Nivel Intermedio</td>
+                            <td>Tienes buenas características emprendedoras. Te sugerimos profundizar en áreas específicas del emprendimiento como finanzas, marketing y gestión de equipos. Busca participar en proyectos que desafíen tu creatividad.</td>
+                        </tr>
+                        <tr class="advice-row" id="adviceRow3">
+                            <td>51% - 75%</td>
+                            <td>Nivel Avanzado</td>
+                            <td>Eres muy innovador y emprendedor. Te animamos a liderar proyectos, compartir tu conocimiento con otros y buscar inversión o recursos para llevar tus ideas a escala. Considera crear una red de emprendedores.</td>
+                        </tr>
+                        <tr class="advice-row" id="adviceRow4">
+                            <td>76% - 100%</td>
+                            <td>Nivel Experto</td>
+                            <td>Eres un innovador nato con alto potencial emprendedor. Te recomendamos crear tu propio emprendimiento, mentorizar a otros emprendedores, o buscar oportunidades de inversión en startups. Tu visión puede transformar mercados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="your-advice" id="yourAdvice"></div>
             </div>
         </section>
     </main>
