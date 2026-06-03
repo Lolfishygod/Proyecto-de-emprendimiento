@@ -695,17 +695,17 @@ function calculateQuiz() {
             if (percentage <= 25) {
                 level = 'Nivel Básico: Tienes potencial para desarrollar tu capacidad emprendedora.';
                 color = '#fb7185';
-                personalizedAdvice = 'Tienes potencial para desarrollar tu capacidad emprendedora. Recursos recomendados: <a href="https://www.datos.gov.co/" target="_blank" rel="noopener">Datos Abiertos (datos.gov.co)</a> para investigar demanda local, y <a href="https://www.sena.edu.co/" target="_blank" rel="noopener">SENA</a> para formación y talleres prácticos.';
+                personalizedAdvice = 'Tienes potencial para desarrollar tu capacidad emprendedora. Recursos recomendados: <a href="https://www.coursera.org/" target="_blank" rel="noopener">Datos Abiertos (datos.gov.co)</a> para investigar demanda local, y <a href="https://www.sena.edu.co/" target="_blank" rel="noopener">SENA</a> para formación y talleres prácticos.';
                 highlightRow = 'adviceRow1';
             } else if (percentage <= 50) {
                 level = 'Nivel Intermedio: Tienes buenas características emprendedoras.';
                 color = '#f97316';
-                personalizedAdvice = 'Buen progreso. Consulta datos sectoriales en <a href="https://www.datos.gov.co/" target="_blank" rel="noopener">datos.gov.co</a> y tendencias en <a href="https://www.globalinnovationindex.org/" target="_blank" rel="noopener">Global Innovation Index</a>. Considera cursos sobre finanzas y marketing para escalar.';
+                personalizedAdvice = 'Buen progreso. Consulta datos sectoriales en <a href="https://manychat.com/" target="_blank" rel="noopener">datos.gov.co</a> y tendencias en <a href="https://www.globalinnovationindex.org/" target="_blank" rel="noopener">Global Innovation Index</a>. Considera cursos sobre finanzas y marketing para escalar.';
                 highlightRow = 'adviceRow2';
             } else if (percentage <= 75) {
                 level = 'Nivel Avanzado: Eres muy innovador y emprendedor.';
                 color = '#10b981';
-                personalizedAdvice = 'Estás listo para escalar: revisa programas de apoyo y aceleración en <a href="https://www.innpulsa.gov.co/" target="_blank" rel="noopener">Innpulsa</a> y oportunidades de mentoría en <a href="https://www.seedstars.com/" target="_blank" rel="noopener">Seedstars</a>.';
+                personalizedAdvice = 'Estás listo para escalar: revisa programas de apoyo y aceleración en <a href="https://www.innpulsacolombia.com/" target="_blank" rel="noopener">Innpulsa</a> y oportunidades de mentoría en <a href="https://www.seedstars.com/" target="_blank" rel="noopener">Seedstars</a>.';
                 highlightRow = 'adviceRow3';
             } else {
                 level = 'Nivel Experto: Eres un innovador nato con alto potencial emprendedor.';
@@ -744,7 +744,7 @@ function calculateQuiz() {
             } else if (percentage <= 75) {
                 bullets = ['Busca programas de aceleración y mentoría', 'Define métricas clave y KPIs', 'Fortalece el equipo y roles'];
                 links = [
-                    { label: 'Innpulsa', href: 'https://www.innpulsa.gov.co/' },
+                    { label: 'Innpulsa', href: 'https://www.innpulsacolombia.com/' },
                     { label: 'Seedstars', href: 'https://www.seedstars.com/' }
                 ];
             } else {
