@@ -760,8 +760,86 @@ function calculateQuiz() {
     }
 }
 
+// NewsAPI Integration
+async function fetchAndRenderNews() {
+    const newsGrid = document.querySelector('.news-grid');
+    if (!newsGrid) return;
+    
+    // API Key for NewsAPI - replace with your own key from https://newsapi.org
+    const API_KEY = 'e2918e46897f473aa221c408504ec389'
+    const SEARCH_QUERIES = [
+        'emprendimiento innovación',
+        'startups tecnología',
+        'emprendimiento social'
+    ];
+    
+    try {
+        // Fetch news for each query
+        const newsPromises = SEARCH_QUERIES.map(query =>
+            fetch(`https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&language=es&sortBy=publishedAt&pageSize=1&apiKey=${API_KEY}`)
+                .then(res => res.json())
+        );
+        
+        const results = await Promise.all(newsPromises);
+        const articles = results.flatMap(r => r.articles || []).filter(a => a.urlToImage && a.description);
+        
+        if (articles.length === 0) {
+            renderFallbackNews(newsGrid);
+            return;
+        }
+        
+        // Clear existing news and render new ones
+        newsGrid.innerHTML = '';
+        articles.slice(0, 3).forEach(article => {
+            const card = document.createElement('article');
+            card.className = 'news-card';
+            
+            const title = article.title?.substring(0, 60) + '...' || 'Noticia sin título';
+            const description = article.description?.substring(0, 120) + '...' || 'Sin descripción';
+            const source = article.source?.name || 'Fuente desconocida';
+            const url = article.url;
+            
+            card.innerHTML = `
+                <h3>${title}</h3>
+                <p>${description}</p>
+                <small style="color: var(--muted); font-size: 0.85rem;">Fuente: ${source}</small>
+                <a href="${url}" target="_blank" rel="noopener">Leer más</a>
+            `;
+            
+            newsGrid.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Error fetching news:', error);
+        renderFallbackNews(newsGrid);
+    }
+}
+
+// Fallback news if API fails
+function renderFallbackNews(newsGrid) {
+    newsGrid.innerHTML = `
+        <article class="news-card">
+            <h3>DATA Abierta Colombia</h3>
+            <p>Consulta datos oficiales sobre emprendimiento, empleo y sectores productivos en Colombia.</p>
+            <a href="https://www.datos.gov.co/" target="_blank" rel="noopener">Ir a datos.gov.co</a>
+        </article>
+        <article class="news-card">
+            <h3>Emprendimiento femenino</h3>
+            <p>Conoce cómo crece el liderazgo de mujeres emprendedoras y qué sectores están impulsando.</p>
+            <a href="https://www.womenglobalentrepreneurship.org/" target="_blank" rel="noopener">Ver informe</a>
+        </article>
+        <article class="news-card">
+            <h3>Innovación global</h3>
+            <p>Investiga tendencias mundiales y observa cómo ha evolucionado la innovación en las últimas décadas.</p>
+            <a href="https://www.globalinnovationindex.org/" target="_blank" rel="noopener">Ver índice</a>
+        </article>
+    `;
+}
+
 // Evento update para filtros
 document.addEventListener('DOMContentLoaded', () => {
+    // Fetch and render news from NewsAPI
+    fetchAndRenderNews();
+    
     populateYearFilters();
     populateFilters();
     
