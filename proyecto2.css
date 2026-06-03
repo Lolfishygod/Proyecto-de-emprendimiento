@@ -683,6 +683,37 @@ h2 {
     color: var(--primary);
 }
 
+/* New styles for advice cards and resource buttons */
+.advice-card {
+    padding: 1rem 1.2rem;
+    border-radius: 0.9rem;
+    background: linear-gradient(180deg, rgba(15,23,42,0.95), rgba(15,23,42,0.9));
+    border: 1px solid rgba(148,163,184,0.08);
+}
+.advice-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.05rem;
+}
+.advice-links {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+.resource-button {
+    display: inline-block;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.6rem;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: #020617;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.resource-button:hover {
+    transform: translateY(-2px);
+}
+
 .advice-table {
     width: 100%;
     border-collapse: collapse;

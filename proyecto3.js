@@ -403,24 +403,138 @@ function setupEstimationForm() {
     }
     
     if (estimateButton) {
+        // Enhance estimation form: render interactive option cards and compute a score
+        const estimationQuestions = [
+            {
+                question: 'Nivel de validación de la idea',
+                options: [
+                    { text: 'No validada', weight: 1 },
+                    { text: 'Entrevistas a usuarios', weight: 2 },
+                    { text: 'MVP probado', weight: 3 },
+                    { text: 'Producto en el mercado', weight: 4 }
+                ]
+            },
+            {
+                question: 'Capacidad del equipo',
+                options: [
+                    { text: 'Solo/a', weight: 1 },
+                    { text: 'Equipo pequeño', weight: 2 },
+                    { text: 'Equipo con experiencia', weight: 3 },
+                    { text: 'Equipo completo', weight: 4 }
+                ]
+            },
+            {
+                question: 'Acceso a financiamiento',
+                options: [
+                    { text: 'Ninguno', weight: 1 },
+                    { text: 'Ahorros propios', weight: 2 },
+                    { text: 'Inversores/creditos', weight: 3 },
+                    { text: 'Financiamiento asegurado', weight: 4 }
+                ]
+            }
+        ];
+
+        // Render options once (inside the estimation card)
+        const estimationCard = document.getElementById('peopleCount')?.closest('.estimation-card');
+        if (estimationCard && !document.getElementById('estimationOptions')) {
+            const container = document.createElement('div');
+            container.id = 'estimationOptions';
+            container.className = 'quiz-grid';
+
+            estimationQuestions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.innerHTML = `<h3>${q.question}</h3><div class="quiz-options" data-question="${idx}"></div>`;
+
+                const optionsDiv = card.querySelector('.quiz-options');
+                q.options.forEach(opt => {
+                    const optDiv = document.createElement('div');
+                    optDiv.className = 'quiz-option';
+                    optDiv.textContent = opt.text;
+                    optDiv.dataset.weight = opt.weight;
+                    optDiv.addEventListener('click', () => {
+                        optionsDiv.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+                        optDiv.classList.add('selected');
+                    });
+                    optionsDiv.appendChild(optDiv);
+                });
+
+                container.appendChild(card);
+            });
+
+            // Insert the interactive questions above the estimate button
+            estimateButton.parentElement.insertBefore(container, estimateButton);
+        }
+
         estimateButton.addEventListener('click', () => {
-            const people = parseInt(peopleCount.value);
-            const type = businessType.value;
-            
-            const typeMultipliers = {
-                'Tecnología': 2.5,
-                'Social': 1.8,
-                'Creativo': 1.6,
-                'Comercio': 1.4,
-                'Servicios': 1.3
+            // Collect selected option weights
+            const optionsContainers = document.querySelectorAll('#estimationOptions .quiz-options');
+            const weights = [];
+            optionsContainers.forEach(c => {
+                const sel = c.querySelector('.quiz-option.selected');
+                weights.push(sel ? parseInt(sel.dataset.weight, 10) : 1);
+            });
+
+            const avgWeight = weights.length ? (weights.reduce((s, n) => s + n, 0) / weights.length) : 1;
+            const people = peopleCount ? parseInt(peopleCount.value, 10) : 20;
+            const type = businessType ? businessType.value : 'Tecnología';
+
+            // Business type influence (normalized multiplier)
+            const typeWeightMap = {
+                'Tecnología': 1.25,
+                'Social': 0.95,
+                'Creativo': 1.05,
+                'Comercio': 1.05,
+                'Servicios': 0.98
             };
-            
-            const score = Math.round(people * typeMultipliers[type]);
-            
-            estimateResult.innerHTML = `
-                <div style="font-size: 1.6rem; font-weight: 700; color: #38bdf8; margin-bottom: 0.5rem;">${score}</div>
-                <div>Índice de fuerza emprendedora para ${people} personas en ${type}</div>
-            `;
+            const typeWeight = typeWeightMap[type] || 1;
+
+            // Compose a final score 0-100 combining people, type and selected option weights
+            // people: 0-100 scaled to ~45% influence
+            // typeWeight: mapped to 0-28 scale by multiplying ~20
+            // avgWeight (1-4) mapped to 0-35 scale
+            const score = Math.min(100, Math.round(
+                (people * 0.45) + (typeWeight * 20) + (((avgWeight - 1) / 3) * 35)
+            ));
+
+            // Display result and short advice
+            if (estimateResult) {
+                estimateResult.innerHTML = `<div><strong>Estimación de fuerza emprendedora:</strong> ${score}%</div>`;
+
+                // build bullets and links for estimation
+                let bullets = [];
+                let links = [];
+                if (score <= 25) {
+                    bullets = ['Valida la idea con usuarios', 'Busca formación y talleres', 'Prueba pilotos pequeños'];
+                    links = [
+                        { label: 'Datos Abiertos', href: 'https://www.datos.gov.co/' },
+                        { label: 'SENA', href: 'https://www.sena.edu.co/' }
+                    ];
+                } else if (score <= 50) {
+                    bullets = ['Fortalece el equipo', 'Mejora la propuesta de valor', 'Valida tu modelo de ingresos'];
+                    links = [
+                        { label: 'Datos Abiertos', href: 'https://www.datos.gov.co/' },
+                        { label: 'Innpulsa', href: 'https://www.innpulsa.gov.co/' }
+                    ];
+                } else if (score <= 75) {
+                    bullets = ['Busca alianzas y mentores', 'Define métricas clave', 'Prepara un plan de inversión'];
+                    links = [
+                        { label: 'Innpulsa', href: 'https://www.innpulsa.gov.co/' },
+                        { label: 'Seedstars', href: 'https://www.seedstars.com/' }
+                    ];
+                } else {
+                    bullets = ['Prepara pitch y materiales para inversores', 'Explora redes de inversión', 'Planifica escalabilidad'];
+                    links = [
+                        { label: 'AngelList', href: 'https://angel.co/' },
+                        { label: 'Seedstars', href: 'https://www.seedstars.com/' }
+                    ];
+                }
+
+                const adviceContainer = document.createElement('div');
+                adviceContainer.style.marginTop = '10px';
+                estimateResult.appendChild(adviceContainer);
+                renderAdviceCard(adviceContainer, 'Sugerencias', 'var(--primary)', bullets, links);
+            }
         });
     }
 }
@@ -504,6 +618,51 @@ function setupQuiz() {
     });
 }
 
+// Helper: render an advice card with bullets and resource links
+function renderAdviceCard(container, title, color, bullets = [], links = []) {
+    if (!container) return;
+    container.innerHTML = '';
+
+    const card = document.createElement('div');
+    card.className = 'advice-card';
+
+    const header = document.createElement('h4');
+    header.textContent = title;
+    header.style.color = color;
+    header.style.margin = '0 0 8px 0';
+    card.appendChild(header);
+
+    if (bullets.length) {
+        const ul = document.createElement('ul');
+        ul.style.margin = '0 0 8px 1rem';
+        bullets.forEach(b => {
+            const li = document.createElement('li');
+            li.style.color = 'var(--muted)';
+            li.style.marginBottom = '6px';
+            li.textContent = b;
+            ul.appendChild(li);
+        });
+        card.appendChild(ul);
+    }
+
+    if (links.length) {
+        const linksWrap = document.createElement('div');
+        linksWrap.className = 'advice-links';
+        links.forEach(l => {
+            const a = document.createElement('a');
+            a.className = 'resource-button';
+            a.href = l.href;
+            a.target = '_blank';
+            a.rel = 'noopener';
+            a.textContent = l.label;
+            linksWrap.appendChild(a);
+        });
+        card.appendChild(linksWrap);
+    }
+
+    container.appendChild(card);
+}
+
 function calculateQuiz() {
     const calculateButton = document.getElementById('calculateQuiz');
     const quizScore = document.getElementById('quizScore');
@@ -536,22 +695,22 @@ function calculateQuiz() {
             if (percentage <= 25) {
                 level = 'Nivel Básico: Tienes potencial para desarrollar tu capacidad emprendedora.';
                 color = '#fb7185';
-                personalizedAdvice = 'Tienes potencial para desarrollar tu capacidad emprendedora. Te recomendamos comenzar a leer sobre innovación, asistir a talleres de emprendimiento y buscar mentores en tu área de interés. No temas experimentar con ideas pequeñas.';
+                personalizedAdvice = 'Tienes potencial para desarrollar tu capacidad emprendedora. Recursos recomendados: <a href="https://www.datos.gov.co/" target="_blank" rel="noopener">Datos Abiertos (datos.gov.co)</a> para investigar demanda local, y <a href="https://www.sena.edu.co/" target="_blank" rel="noopener">SENA</a> para formación y talleres prácticos.';
                 highlightRow = 'adviceRow1';
             } else if (percentage <= 50) {
                 level = 'Nivel Intermedio: Tienes buenas características emprendedoras.';
                 color = '#f97316';
-                personalizedAdvice = 'Tienes buenas características emprendedoras. Te sugerimos profundizar en áreas específicas del emprendimiento como finanzas, marketing y gestión de equipos. Busca participar en proyectos que desafíen tu creatividad.';
+                personalizedAdvice = 'Buen progreso. Consulta datos sectoriales en <a href="https://www.datos.gov.co/" target="_blank" rel="noopener">datos.gov.co</a> y tendencias en <a href="https://www.globalinnovationindex.org/" target="_blank" rel="noopener">Global Innovation Index</a>. Considera cursos sobre finanzas y marketing para escalar.';
                 highlightRow = 'adviceRow2';
             } else if (percentage <= 75) {
                 level = 'Nivel Avanzado: Eres muy innovador y emprendedor.';
                 color = '#10b981';
-                personalizedAdvice = 'Eres muy innovador y emprendedor. Te animamos a liderar proyectos, compartir tu conocimiento con otros y buscar inversión o recursos para llevar tus ideas a escala. Considera crear una red de emprendedores.';
+                personalizedAdvice = 'Estás listo para escalar: revisa programas de apoyo y aceleración en <a href="https://www.innpulsa.gov.co/" target="_blank" rel="noopener">Innpulsa</a> y oportunidades de mentoría en <a href="https://www.seedstars.com/" target="_blank" rel="noopener">Seedstars</a>.';
                 highlightRow = 'adviceRow3';
             } else {
                 level = 'Nivel Experto: Eres un innovador nato con alto potencial emprendedor.';
                 color = '#38bdf8';
-                personalizedAdvice = 'Eres un innovador nato con alto potencial emprendedor. Te recomendamos crear tu propio emprendimiento, mentorizar a otros emprendedores, o buscar oportunidades de inversión en startups. Tu visión puede transformar mercados.';
+                personalizedAdvice = 'Alto potencial: prepara tu pitch y busca redes de inversión en <a href="https://angel.co/" target="_blank" rel="noopener">AngelList</a> o programas internacionales. También revisa convocatorias en <a href="https://www.innpulsa.gov.co/" target="_blank" rel="noopener">Innpulsa</a>.';
                 highlightRow = 'adviceRow4';
             }
             
@@ -565,9 +724,38 @@ function calculateQuiz() {
             quizScore.style.borderColor = color;
             quizScore.innerHTML = `<div style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${Math.round(percentage)}%</div><div>${level}</div>`;
             
-            // Mostrar tabla de consejos
+            // Mostrar tabla de consejos y tarjeta visual personalizada
             adviceTableContainer.style.display = 'block';
-            yourAdvice.innerHTML = `<div class="personalized-advice" style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(251, 113, 133, 0.1)); border-radius: 1rem; border-left: 4px solid ${color};"><h4 style="margin-top: 0; color: ${color};">Tu Consejo Personalizado</h4><p style="margin: 0; color: var(--muted);">${personalizedAdvice}</p></div>`;
+            // construir bullets y links según nivel
+            let bullets = [];
+            let links = [];
+            if (percentage <= 25) {
+                bullets = ['Investiga demanda local usando datos abiertos', 'Realiza talleres o formaciones básicas', 'Valida tu idea con entrevistas a usuarios'];
+                links = [
+                    { label: 'Datos Abiertos', href: 'https://www.datos.gov.co/' },
+                    { label: 'Cursos SENA', href: 'https://www.sena.edu.co/' }
+                ];
+            } else if (percentage <= 50) {
+                bullets = ['Analiza competencia y precios', 'Mejora la propuesta de valor', 'Haz pruebas de mercado pequeñas'];
+                links = [
+                    { label: 'Datos Abiertos', href: 'https://www.datos.gov.co/' },
+                    { label: 'Global Innovation Index', href: 'https://www.globalinnovationindex.org/' }
+                ];
+            } else if (percentage <= 75) {
+                bullets = ['Busca programas de aceleración y mentoría', 'Define métricas clave y KPIs', 'Fortalece el equipo y roles'];
+                links = [
+                    { label: 'Innpulsa', href: 'https://www.innpulsa.gov.co/' },
+                    { label: 'Seedstars', href: 'https://www.seedstars.com/' }
+                ];
+            } else {
+                bullets = ['Prepara pitch y deck para inversores', 'Explora redes de inversión y convocatorias', 'Planea expansión o internacionalización'];
+                links = [
+                    { label: 'AngelList', href: 'https://angel.co/' },
+                    { label: 'Seedstars', href: 'https://www.seedstars.com/' }
+                ];
+            }
+
+            renderAdviceCard(yourAdvice, 'Tu Consejo Personalizado', color, bullets, links);
         });
     }
 }
