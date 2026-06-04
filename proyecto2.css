@@ -262,8 +262,11 @@ h2 {
 
 .section {
     padding: 3rem 1.5rem;
-    max-width: 1180px;
+    max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .section:nth-of-type(even) {
@@ -360,6 +363,33 @@ h2 {
     background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
     border: 1px solid rgba(148, 163, 184, 0.14);
     box-shadow: 0 24px 50px rgba(2, 6, 23, 0.26);
+}
+
+.glossary-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    margin-top: 1.5rem;
+}
+
+.glossary-card {
+    padding: 1.7rem;
+    border-radius: 1.75rem;
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.92));
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 20px 40px rgba(2, 6, 23, 0.2);
+}
+
+.glossary-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    font-size: 1.1rem;
+}
+
+.glossary-card p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
 }
 
 .idea-card h3 {
@@ -524,9 +554,11 @@ h2 {
 
 .form-grid {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    margin: 2rem auto 0;
+    width: 100%;
+    max-width: 760px;
 }
 
 .estimation-card,
@@ -579,12 +611,11 @@ h2 {
 }
 
 #estimateResult {
-    display: block;
-    padding: 1.5rem;
+    padding: 1rem 1.25rem;
     background: rgba(56, 189, 248, 0.1);
     border-radius: 1rem;
     margin-top: 1rem;
-    min-height: 100px;
+    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
